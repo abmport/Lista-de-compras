@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+{% block corpo %}
+<nav>
+    <ul>
+        <a href="/login">Fazer Login:</a>
+    </ul>
+</nav>
+<section>
+    <article>
+            <form action="{{ url_for('login') }}" method="POST">
+                <p>
+                  Usuário:
+                  <input type="text" required name="username">
+                   Senha:
+                  <input type="password" required name="password">
+                  <input type="submit" value="Login">
+                  {% if erro %} Erro: {{ erro }} {% endif %}
+                </p>
+              </form>
+    </article>
+</section>
+
+{% endblock %}

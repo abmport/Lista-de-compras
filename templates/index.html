@@ -1,0 +1,46 @@
+<html lang="pt-br">
+<head>
+    <title>Flask - Lista de Compras </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="widh=device-widht,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./{{url_for('static', filename='estilo.css') }}" />
+</head>
+
+<body>
+    <header>
+        <a href="/"><img src="{{url_for('static', filename='logo.png') }}"></a>
+        <p>Lista de compras</p>
+    </header>
+    {% block corpo %}
+    {% if session.logado %}
+    <nav>
+        <ul>            
+            <a href="/minhalista">Minha lista de compras</a>
+        </ul>
+    </nav>
+    {%else%}
+    <nav>
+        <ul>            
+            <a href="/login">Fazer Login</a>
+        </ul>
+    </nav>
+    {% endif %}
+    <section>
+        <article>
+            <p class="destaque">
+                Crie sua lista de compras aqui!
+                <div class="texto">Você já percebeu que esqueceu de comprar alguma coisa de que precisava só quando já tinha voltado do supermercado? Na hora de fazer compras, apoiar-se na memória nem sempre basta.</div>
+                <div class="texto">Faça em casa e, na hora de ir ao supermercado, confira que itens dessa lista precisam ser comprados. Assim, você não corre o risco de esquecer de anotar alguma coisa e ainda aproveita para verificar o que já tem, conferindo quantidades e datas de validade.</div>
+
+            </p>
+        </article>
+    </section>
+    {% endblock %}
+    <footer>
+                <a href="https://www.facebook.com/abner.melo.porto" target="_blank"><img src="{{url_for('static', filename='face.png') }}" alt="Facebook"></a>
+                <a href="https://www.instagram.com/abner.porto/" target="_blank"><img src="{{url_for('static', filename='insta.png') }}" alt="Instagram"></a>
+                <a href="https://www.linkedin.com/in/abnermeloporto/" target="_blank"><img src="{{url_for('static', filename='link.png') }}" alt="Linkedin"></a>
+                <a href="https://github.com/abmport" target="_blank"><img src="{{url_for('static', filename='git.png') }}" alt="GitHub"></a>
+    </footer>
+</body>
+</html>

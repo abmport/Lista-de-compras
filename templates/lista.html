@@ -1,0 +1,85 @@
+{% extends "index.html" %}
+{% block corpo %}
+{% if session.logado %}
+<nav>
+    <ul>
+        <a href="/minhalista">Lista de compra</a> |
+        <a href="/logout">Sair</a>
+</nav>
+<section class="lista">
+    <form action="{{ url_for('adicionaritem') }}" method="POST" class="add">
+        <table>
+            <tbody>
+            <tr>
+                <td>Produto:</td> 
+                <td><input type="text" required size="30" name="produto"></td>
+            </tr>
+                <tr>
+                    <td>Valor: </td>
+                    <td><input type="number" required size="30" name="valor"></td>
+                
+            
+            </tr>
+            <tr>
+                <td><input type="submit" value="Adicionar"></td>    
+            </tr>
+            </tbody>
+       </table>
+    </form>
+    
+<table id="lista">
+    <thead>
+        <th>Item</th>
+        <th>Preço</th>
+
+    </thead>
+
+    <tbody>
+        
+        {% for lista in listas  %}
+        <tr>
+            <td>{{ lista.produto }}</td>
+            <td>R$ {{ lista.valor }}</td>
+            <td>
+                <form action="{{ url_for('excluiritem') }}" method="POST">
+                <input type="hidden" name="id" value="{{lista.id}}">
+                <input type="submit" value="Excluir">
+                </form>
+
+            </td>
+            
+            
+        </tr>   
+        {% else %}
+        <tr>
+        <td colspan="2">
+                 <p id="nada">Nenhum item em sua lista! 
+            </p>
+        </td>
+        </tr>
+    {% endfor %}
+    <tr id="total">
+        <td>Total: </td>
+        <td>
+         
+
+                R$ {{ listas|sum(attribute='valor') }}
+
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+
+
+</section>
+{%else%}
+<nav>
+    <ul>
+        <a>Você foi desconectado, deseja logar novamente?</a> 
+        <a href="/login">Sim</a>
+        |
+        <a href="/">Não</a>
+</nav>
+{% endif %}
+{% endblock %}
